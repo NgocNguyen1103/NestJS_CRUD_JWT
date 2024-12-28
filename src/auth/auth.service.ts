@@ -85,9 +85,9 @@ export class AuthService{
     async generate_token(userId: number,email: string) {
         const payload = {
             sub: userId,
-            email
+            email: email
         }
-
+        console.log('Payload before signing:', payload); 
         const token = await this.jwt.signAsync(payload, { expiresIn: '5m', secret: this.config.get('JWT_SECRET') })
 
         return {"access_token": token,}
