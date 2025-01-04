@@ -3,12 +3,13 @@ import { AuthGuard } from '@nestjs/passport';
 import { userInfo } from 'os';
 import { Request } from 'express';
 import { JwtAuthGuard } from 'src/auth/auth.jwt.guard';
+import { GetUser } from './decorator/get-user.decorator';
 
 @Controller('user')
 export class UserController {
     @UseGuards(JwtAuthGuard)
     @Get('me')
-    getMe(@Req() req: Request) {      
-        return req.user
+    getMe(@GetUser() user) {      
+        return user
     }
 }
